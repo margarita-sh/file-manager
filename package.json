@@ -1,0 +1,15 @@
+{
+	"name": "file-manager",
+	"version": "1.0.0",
+	"description": "",
+	"type" : "module",
+	"scripts": {
+	  "start": "node src/index.js"
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "git+https://github.com/margarita-sh/file-manager.git"
+	},
+	"author": "margarita-sh"
+  }
+  
