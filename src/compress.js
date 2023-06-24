@@ -3,9 +3,10 @@ import zlib from 'zlib';
 import path from 'path';
 
 const compressFile = (sourceFilePath, destinationDirPath, workingDirectory) => {
-	const destinationFilePath = path.join(destinationDirPath, path.basename(sourceFilePath));
-	const readStream = fs.createReadStream(sourceFilePath);
-	const writeStream = fs.createWriteStream(destinationFilePath);
+	const readPath = path.resolve(workingDirectory, sourceFilePath);
+	const writePath = path.resolve(workingDirectory, destinationDirPath, path.basename(sourceFilePath));
+	const readStream = fs.createReadStream(readPath);
+	const writeStream = fs.createWriteStream(writePath);
 
 	const brotli = zlib.createBrotliCompress();
 

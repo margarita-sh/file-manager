@@ -10,7 +10,8 @@ import { copyFile } from './cp.js';
 import { moveFile } from './mv.js';
 import { calculateFileHash } from './hash.js'
 import { compressFile } from './compress.js';
-import {decompressFile} from './decompress.js'
+import { decompressFile } from './decompress.js';
+import { getOperationInfo } from './os.js'
 
 let workingDirectory = os.homedir();
 
@@ -64,6 +65,9 @@ const launchFileManager = async () => {
 					break;
 				case 'decompress':
 					await decompressFile(args[0], args[1], workingDirectory);
+					break;
+				case 'os':
+					await getOperationInfo(args[0], workingDirectory);
 					break;
 				case '.exit':
 					console.log(`Thank you for using File Manager, ${username}, goodbye!`);
