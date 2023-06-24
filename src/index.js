@@ -37,7 +37,7 @@ const launchFileManager = async () => {
 					await outputFileList(workingDirectory);
 					break;
 				case 'cd':
-					workingDirectory = changeDir(args[0], workingDirectory);
+					workingDirectory = await changeDir(args[0], workingDirectory);
 					break;
 				case 'cat':
 					await readAndPrintFileContent(args[0], workingDirectory);
@@ -70,7 +70,6 @@ const launchFileManager = async () => {
 					await getOperationInfo(args[0], workingDirectory);
 					break;
 				case '.exit':
-					console.log(`Thank you for using File Manager, ${username}, goodbye!`);
 					rl.close();
 					break;
 				default:

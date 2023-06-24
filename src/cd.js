@@ -1,16 +1,17 @@
 import path from 'path';
 import fs from 'fs';
 
-const changeDir = (dirName, workingDirectory) => {
+const changeDir = async (dirName, workingDirectory) => {
 	const currentDirectory = path.resolve(workingDirectory, dirName);
-	const isDirExist = fs.existsSync(currentDirectory); //fs.exists() is deprecated, but fs.existsSync() is not
-	if (isDirExist) {
+	try {
+		await fs.promises.access(currentDirectory, fs.constants.F_OK);
 		console.log(`You are currently in ${currentDirectory}`);
 		return currentDirectory;
+	} catch (error) {
+		console.log(`Operation failed: sorry, there is no this directory ${currentDirectory}`);
+		console.log(`You are currently in ${workingDirectory}`);
+		return workingDirectory;
 	}
-	console.log(`Sorry, there is no this directory ${currentDirectory}`);
-	console.log(`You are currently in ${workingDirectory}`);
-	return workingDirectory;
-}
+};
 
 export { changeDir };
