@@ -2,14 +2,14 @@ import fs from 'fs';
 import path from 'path';
 
 const moveFile = (sourceFilePath, destinationDirPath, workingDirectory) => {
+	const readPath = path.resolve(workingDirectory, sourceFilePath);
+	const writePath = path.resolve(workingDirectory, destinationDirPath, path.basename(sourceFilePath));
 
-	const destinationFilePath = path.join(destinationDirPath, path.basename(sourceFilePath));
-
-	const sourceStream = fs.createReadStream(sourceFilePath);
-	const destinationStream = fs.createWriteStream(destinationFilePath);
+	const sourceStream = fs.createReadStream(readPath);
+	const destinationStream = fs.createWriteStream(writePath);
 
 	sourceStream.on('error', (err) => {
-		console.log('Operation failed', err);
+		console.log('Operation failed');
 	});
 
 	destinationStream.on('error', (err) => {
@@ -17,13 +17,13 @@ const moveFile = (sourceFilePath, destinationDirPath, workingDirectory) => {
 	});
 
 	destinationStream.on('finish', () => {
-		fs.unlink(sourceFilePath, (err) => {
+		fs.unlink(readPath, (err) => {
 			if (err) {
-			  console.log('Operation failed');
+				console.log('Operation failed');
 			} else {
-			  console.log('Source file deleted.');
+				console.log('Source file deleted.');
 			}
-		  });
+		});
 		console.log(`You are currently in ${workingDirectory}`);
 	});
 

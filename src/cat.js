@@ -13,7 +13,7 @@ const readAndPrintFileContent = (fileName, workingDirectory) => {
 	});
 
 	readableStream.on('error', (err) => {
-		console.error('Error reading file:', err);
+		console.error('Operation failed');
 	});
 
 };

@@ -3,7 +3,12 @@ import path from 'path';
 
 const createEmptyFile = (fileName, workingDirectory) => {
 	const filePath = path.resolve(workingDirectory, fileName);
-	fs.createWriteStream(filePath);
-	console.log(`\nYou are currently in ${workingDirectory}`);
+	try {
+		fs.createWriteStream(filePath);
+		console.log(`\nFile ${filePath} has been created`);
+		console.log(`\nYou are currently in ${workingDirectory}`);
+	} catch (err) {
+		console.log(`\nOperation failed`);
+	}
 }
-export {createEmptyFile};
+export { createEmptyFile };
